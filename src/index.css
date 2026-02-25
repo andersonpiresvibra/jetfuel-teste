@@ -1,0 +1,102 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+
+  --color-slate-850: #151e2e;
+  --color-slate-900: #0f172a;
+  --color-slate-950: #020617;
+  --color-emerald-450: #10b981;
+
+  --animate-spin-slow: spin 8s linear infinite;
+
+  --shadow-neon: 0 0 10px rgba(16, 185, 129, 0.4), 0 0 20px rgba(16, 185, 129, 0.2);
+  --shadow-neon-strong: 0 0 15px rgba(16, 185, 129, 0.6), 0 0 30px rgba(16, 185, 129, 0.3);
+}
+
+@layer base {
+  body {
+    @apply bg-slate-950 text-slate-200 antialiased;
+    margin: 0;
+  }
+
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent; 
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #334155;
+    border-radius: 4px;
+  }
+  .dark ::-webkit-scrollbar-track {
+    background: #0f172a; 
+  }
+  .dark ::-webkit-scrollbar-thumb:hover {
+    background: #475569; 
+  }
+}
+
+@layer utilities {
+  .animate-spin-slow-custom {
+    animation: spin 12s linear infinite;
+  }
+  .custom-scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+  .custom-scrollbar-none {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+/* --- REGRAS DE IMPRESSÃO DE ALTA FIDELIDADE (MODO OVERLAY) --- */
+@media print {
+  /* Oculta tudo por padrão */
+  body * {
+    visibility: hidden;
+  }
+
+  /* Torna o container do relatório e seus filhos visíveis */
+  #printable-report-container,
+  #printable-report-container * {
+    visibility: visible;
+  }
+
+  /* Estiliza o container como um modal que cobre toda a tela */
+  #printable-report-container {
+    position: fixed; /* Chave para o overlay */
+    top: 0;
+    left: 0;
+    width: 100vw; /* Largura total da viewport */
+    height: 100vh; /* Altura total da viewport */
+    background-color: rgba(15, 23, 42, 0.8); /* Fundo slate-900 com 80% de opacidade */
+    backdrop-filter: blur(4px); /* Efeito de desfoque no fundo */
+    z-index: 9999; /* Garante que fique sobre todo o conteúdo */
+    overflow-y: auto; /* Adiciona scroll se o conteúdo for maior que a tela */
+    padding: 2rem; /* Espaçamento interno */
+    margin: 0;
+    box-shadow: none;
+    border: none;
+  }
+
+  /* Oculta elementos marcados como no-print */
+  .no-print {
+    display: none !important;
+  }
+
+  /* Remove configurações de página desnecessárias para o modo overlay */
+  @page {
+    size: auto;
+    margin: 0;
+  }
+
+  /* Garante que o body não interfira */
+  body {
+    background-color: transparent !important;
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "name": "Remix: JETFUEL-SIM-teste",
+  "description": "Simulator SaaS de alta fidelidade para gestão de combustível e frotas de aviação com inteligência artificial generativa.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
